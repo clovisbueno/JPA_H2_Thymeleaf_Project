@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Cadastro de Arvores</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link rel="stylesheet" type="text/css" href="addTree.css"> <!-- override na cor do panel-heading e na div Mensagem de Erro -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Cadastro de Arvores</strong>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" th:object="${tree}" th:action="@{/save}" method="POST" style="margin: 10px">
+				<div class="form-group">
+ 					<fieldset>
+						<div class="form-group row">
+							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+							</div>   
+						</div> 					
+						<div class="form-group row">
+						    <div class="col-md-1">
+						        <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+						    </div>
+						 </div>
+						<div class="form-group row">                                                          
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('location')}? 'has-error'">
+							    <label>Local</label>
+							    <input type="text" class="form-control input-sm" th:field="*{location}" autofocus="autofocus" placeholder="Informe o local" maxlength="50"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('species')}? 'has-error'">
+								<label>Esp&eacute;cie</label> 
+								<input type="text" class="form-control input-sm" th:field="*{species}" maxlength="150" placeholder="Informe a espécie"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-1" th:classappend="${#fields.hasErrors('approximateAge')}? 'has-error'">
+								<label>Idade Aproximada</label> 
+								<input type="number" id="approxAge" class="form-control input-sm" th:field="*{approximateAge}" placeholder="1ano increments" step="1"/>								
+							</div>
+						</div>		
+						<div class="form-group row">
+							<div class="col-md-1" th:classappend="${#fields.hasErrors('height')}? 'has-error'">
+								<label>Altura (m)</label> 
+								<input type="number" id="height" class="form-control input-sm" th:field="*{height}" placeholder="1m increments" step="0.1"/>								
+							</div>
+						</div>	
+							<div class="form-group row">
+							<div class="col-md-1" th:classappend="${#fields.hasErrors('treeTopDiameter')}? 'has-error'">
+								<label>Diametro da Copa (m)</label> 
+								<input type="number" id="treeTop" class="form-control input-sm" th:field="*{treeTopDiameter}" placeholder="1m increments" step="0.1"/>								
+							</div>
+						</div>									
+					</fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+					<a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

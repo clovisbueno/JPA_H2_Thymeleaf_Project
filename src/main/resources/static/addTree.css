@@ -1,0 +1,11 @@
+.alert-danger {
+    color: #a94442;
+    background-color: #d9f4d0;
+    border-color: #43af27;
+}
+	
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #67cd49;
+    border-color: #008040;
+}
